@@ -56,7 +56,9 @@ const CreateRoomPage = () => {
       onSuccess: (data) => {
         setSuccessMessage("Poll created successfully!");
         setPollCode(data.data.code); // Simpan pollCode untuk navigasi
-        setPollLink(`localhost:3000/room/voting/${data.data.code}`); // Simpan link dari respons
+        setPollLink(
+          `${process.env.NEXT_PUBLIC_FRONTEND_URL}/room/voting/${data.data.code}`
+        ); // Simpan link dari respons
         setErrorMessage("");
       },
       onError: (err) => {
