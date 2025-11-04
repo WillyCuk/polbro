@@ -39,7 +39,7 @@ const HistoryPage = () => {
     data: historyData,
     error,
     isLoading,
-  } = useSWR("http://localhost:8000/api/v1/polling/my-pollings", fetcher);
+  } = useSWR(`${process.env.NEXT_PUBLIC_POLLING_BACKEND_API_URL}/api/v1/polling/my-pollings`, fetcher);
 
   const handleHistoryItemClick = (pollCode) => {
     router.push(`/room/result/${encodeURIComponent(pollCode)}`);
