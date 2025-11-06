@@ -1,0 +1,27 @@
+
+# Abaikan folder dependensi, kita install di dalam container
+node_modules
+
+# Abaikan hasil build, kita build di dalam container
+.next
+
+# Abaikan file cache build Next.js (jika ada)
+.swc
+
+# Abaikan folder Git
+.git
+
+# Abaikan file Docker itu sendiri
+Dockerfile
+docker-compose.yml
+
+# Abaikan file ini
+.dockerignore
+
+# Abaikan file environment lokal
+.env.local
+
+# Abaikan file log npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
