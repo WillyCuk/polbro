@@ -72,7 +72,9 @@ const JoinPollPage = () => {
 
     if (!socketRef.current) {
       console.log("Creating WebSocket connection...");
-      socketRef.current = io(process.env.NEXT_PUBLIC_POLLING_BACKEND_API_URL, {
+      const socketUrl = new URL(process.env.NEXT_PUBLIC_POLLING_BACKEND_API_URL).origin;
+      socketRef.current = io(socketUrl, {
+        transports: ['websocket'],
         auth: { token: `Bearer ${token}` },
       });
     }
@@ -149,7 +151,14 @@ const JoinPollPage = () => {
       .off("polling:room", handlePollingRoom)
       .on("polling:room", handlePollingRoom);
     socket.off("exception", handleException).on("exception", handleException);
-
+    socket.on("connect_error", (err) => {
+      console.error("Connection failed");
+      
+      // This will print the target namespace, e.g., "/admin" or "/"
+      console.log("Target Namespace:", socket.nsp); 
+      
+      console.log("Error:", err.message); // "invalid namespace"
+    });
     // Cleanup
     return () => {
       if (socketRef.current) {

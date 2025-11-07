@@ -103,7 +103,9 @@ const ResultPage = () => {
 
     if (!socketRef.current) {
       console.log("Creating WebSocket connection for results...");
-      socketRef.current = io(process.env.NEXT_PUBLIC_POLLING_BACKEND_API_URL, {
+      const socketUrl = new URL(process.env.NEXT_PUBLIC_POLLING_BACKEND_API_URL).origin;
+      socketRef.current = io(socketUrl, {
+        transports: ['websocket'],
         auth: { token: `Bearer ${token}` },
       });
     }
