@@ -54,8 +54,8 @@ Before you begin, ensure you have the following:
 
 1.  **Clone the Repository**
     ```bash
-    git clone <YOUR_FE_REPO_URL>
-    cd <YOUR_REPO_DIRECTORY>
+    git clone https://github.com/WillyCuk/polbro.git
+    cd polbro
     ```
 
 2.  **Set Up Environment Variables**
