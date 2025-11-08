@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Polling Client (FE) for Mata Kuliah DevOps
 
-## Getting Started
+Welcome to the Polling Client repository. This project is the frontend application that serves as the user interface for the polling system.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 📖 Service Functionality
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This application provides the interactive user interface for the Polling System. Its primary functions include:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+* **User Interface:** Delivering a responsive and intuitive layout for users to interact with the system.
+* **Poll Interaction:** Allowing users to browse active polls, view details, and cast votes.
+* **Authentication UI:** Providing the forms and flows for user login and registration.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🏗️ Architectural Highlight: Scalable WebSockets
 
-## Learn More
+Typically, WebSocket applications bind a client to a specific backend server, making horizontal scaling difficult because users on different servers cannot easily communicate.
 
-To learn more about Next.js, take a look at the following resources:
+Our system overcomes this limitation by using **RabbitMQ** as a message broker.
+* We run multiple frontend instances connecting to different backend services.
+* RabbitMQ broadcasts messages between these backend services.
+* This ensures that a user connected to Service A can still interact in real-time with a user connected to Service B.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**To see the full power of this architecture, you will run two distinct frontend applications simultaneously.**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ Tech Stack
+<img width="1367" height="537" alt="image" src="https://github.com/user-attachments/assets/438a7454-eb31-4edf-87d0-1a1132e6d49f" />
 
-## Deploy on Vercel
+This project is built using modern web technologies to ensure a fast and dynamic user experience:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* **[Next.js](https://nextjs.org/)**: A React framework for building full-stack web applications.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🌐 Live Demo
+
+The application is currently deployed and accessible at:
+**[https://polbro-devops.duckdns.org](https://polbro-devops.duckdns.org)**
+
+---
+
+## 🚀 Getting Started Locally
+
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing.
+
+### Prerequisites
+
+Before you begin, ensure you have the following:
+
+1.  **[Docker](https://www.docker.com/get-started)** installed and running.
+2.  **Backend Services:** For full functionality, ensure both the [Polling Service](https://github.com/DevonLoen/polling-service) and [Auth Service](https://github.com/Christian-Tiovanto/auth-service-poll.git) are running locally.
+
+### Installation & Run
+
+1.  **Clone the Repository**
+    ```bash
+    git clone <YOUR_FE_REPO_URL>
+    cd <YOUR_REPO_DIRECTORY>
+    ```
+
+2.  **Set Up Environment Variables**
+    Copy the sample environment file to create your local configuration.
+    ```bash
+    cp .env.sample .env
+    ```
+
+3.  **Start the Application**
+    Use Docker Compose to spin up the frontend containers.
+    ```bash
+    docker compose up -d
+    ```
+
+### ✅ Verification & Testing Scalability
+
+To demonstrate the distributed architecture, this project spins up two separate frontend instances. Open both URLs in different browser windows (or one in Incognito mode) to simulate two users on different server nodes:
+
+* **Instance A:** [http://localhost:3000](http://localhost:3000)
+* **Instance B:** [http://localhost:3001](http://localhost:3001)
+
+Try casting a vote on Instance A and watch it update in real-time on Instance B! 🎉
