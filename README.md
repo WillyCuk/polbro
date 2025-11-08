@@ -61,7 +61,7 @@ Before you begin, ensure you have the following:
 2.  **Set Up Environment Variables**
     Copy the sample environment file to create your local configuration.
     ```bash
-    cp .env.sample .env
+    cp .env.example .env
     ```
 
 3.  **Start the Application**
